@@ -1,0 +1,30 @@
+.container {
+  padding-inline: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  & {
+    form > input {
+      width: 20ch;
+      border-radius: 0.5rem;
+      height: fit-content;
+      background-color: #e4e4e4b2;
+      color: black;
+      font-family: "Inter";
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+    }
+
+    form > button {
+      width: 15ch;
+      height: fit-content;
+      font-size: 1rem;
+      font-family: "Inter";
+      border-radius: 0.5rem;
+      margin-inline: auto;
+      background-color: rgba(207, 207, 207, 0.911);
+    }
+  }
+}
