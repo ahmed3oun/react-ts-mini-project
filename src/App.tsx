@@ -1,21 +1,45 @@
 //import { useState } from "react";
 
+import { useEffect, useState } from "react";
 import "./App.css";
-import ConditionalComponent from "./components/ConditionalComponent";
+import TodoItems from "./components/TodoItems";
+/* import ConditionalComponent from "./components/ConditionalComponent";
 import Counter from "./components/Counter";
 import Forms from "./components/Forms";
 import ListItems from "./components/ListItems";
-import Profile from "./components/Profile";
+import Profile from "./components/Profile"; */
 //import Profile from "./components/Profile";
 
 function App() {
-  //const [count, setCount] = useState(0)
-  /* <Profile first_name="Ahmed" last_name="OUN">
-      Ce profile est un personne
-    </Profile> */
+  const [items, setItems] = useState([] as { id: number; title: string }[]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((res) => res.json())
+      .then((data) => {
+        let _items: any = items;
+        _items = [...data];
+        setItems(_items);
+      });
+  }, []);
+
+  const handleDelete = (item_id: number) => {
+    const _items = items;
+    const filteredItems = _items.filter((i) => i.id !== item_id);
+    setItems(filteredItems);
+  };
+
   return (
     <div>
-      <Forms></Forms>
+      <button
+        onClick={() =>
+          setItems([...items, { id: 0, title: "lorem ipsum.!" }])
+        }
+      >
+        Load more items
+      </button>
+      <TodoItems items={items} delete={handleDelete} />
+      {/* <Forms></Forms>
       ***********
       <Profile first_name={"Ahmed"} last_name="OUN"/>
       ***********
@@ -23,7 +47,7 @@ function App() {
       ***********
       <ConditionalComponent></ConditionalComponent>
       ***********
-      <ListItems></ListItems>
+      <ListItems></ListItems> */}
     </div>
   );
 }
