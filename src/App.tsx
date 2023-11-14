@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import TodoItems from "./components/TodoItems";
+import Posts from "./components/Posts";
 /* import ConditionalComponent from "./components/ConditionalComponent";
 import Counter from "./components/Counter";
 import Forms from "./components/Forms";
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <div>
+      <Posts/>
       <button
         onClick={() =>
           setItems([...items, { id: 0, title: "lorem ipsum.!" }])
@@ -39,6 +41,8 @@ function App() {
         Load more items
       </button>
       <TodoItems items={items} delete={handleDelete} />
+
+
       {/* <Forms></Forms>
       ***********
       <Profile first_name={"Ahmed"} last_name="OUN"/>
