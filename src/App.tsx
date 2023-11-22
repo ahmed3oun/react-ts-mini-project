@@ -1,4 +1,4 @@
-//import { useState } from "react";
+import { createContext, useState } from "react";
 
 // import { useEffect, useState } from "react";
 import "./App.css";
@@ -12,9 +12,11 @@ import ListItems from "./components/ListItems";
 import Profile from "./components/Profile"; */
 //import Profile from "./components/Profile";
 
+const ThemeContext = createContext<string | null>(null);
+
 function App() {
   //const [items, setItems] = useState([] as { id: number; title: string }[]);
-
+  const [theme, setTheme] = useState<string | null>("light");
   /* useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/todos")
       .then((res) => res.json())
@@ -32,8 +34,9 @@ function App() {
   }; */
 
   return (
-    <div>
-      {/* <Posts/>
+    <ThemeContext.Provider value={theme}>
+      <div className={`panel-${theme}`}>
+        {/* <Posts/>
       <button
         onClick={() =>
           setItems([...items, { id: 0, title: "lorem ipsum.!" }])
@@ -42,9 +45,18 @@ function App() {
         Load more items
       </button>
       <TodoItems items={items} delete={handleDelete} /> */}
-
-      <Counter />
-      {/* <Forms></Forms>
+        <label htmlFor="theme">Use dark mode</label>
+        <input
+          type="checkbox"
+          name="theme"
+          id="theme"
+          checked={theme === "dark"}
+          onChange={($event) => {
+            setTheme($event.target.checked ? "dark" : "light");
+          }}
+        />
+        <Counter />
+        {/* <Forms></Forms>
       ***********
       <Profile first_name={"Ahmed"} last_name="OUN"/>
       ***********
@@ -53,7 +65,8 @@ function App() {
       <ConditionalComponent></ConditionalComponent>
       ***********
       <ListItems></ListItems> */}
-    </div>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
